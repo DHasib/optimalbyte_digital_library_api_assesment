@@ -1,10 +1,10 @@
 # Sheba XYZ Booking API Assesment- Local Development Guide
 
-A simple Laravel-based RESTful API for managing bookings in the Sheba XYZ Int. Assesment system.
+A simple Laravel-based RESTful API for managing  Digital library System in the optimalbyte Int. Assesment system.
 
  
 
-This project ships with a **Makefile** that hides almost every Docker / Laravel command you normally have to remember. After cloning, you can be up and running with **one line** to setup everything will be done by automation.
+This project ships with a **script** that hides almost every Docker / Laravel command you normally have to remember. After cloning, you can be up and running with **one line** to setup everything will be done by automation.
 
 
 
@@ -16,7 +16,7 @@ This project ships with a **Makefile** that hides almost every Docker / Laravel 
 | **Docker‑Compose v2** | Bundled with Docker Desktop ≥ 4.13 <br>or `docker compose` plugin on Linux. |                                                                                                  |
 | **GNU Make**          | 4.x                                                                         | Comes pre‑installed on macOS & most Linux distros. Windows: install via WSL or make for Windows. |
 
-> **No local PHP, Composer, MySQL, or Node required** – everything runs inside the `booking_api` container.
+> **No local PHP, Composer, MySQL, or Node required** – everything runs inside the `digital_library_api` container.
 
 
 
@@ -36,7 +36,7 @@ This project ships with a **Makefile** that hides almost every Docker / Laravel 
 
 ```bash
 git clone https://github.com/DHasib/sheba_xyz_booking_api_assesment.git
-cd sheba_xyz_booking_api_assesment
+cd optimalbyte_digital_library_api_assesment_mdhasib522
 ```
 
 
