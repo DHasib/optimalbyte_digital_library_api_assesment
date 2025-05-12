@@ -1,0 +1,27 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite",
+        "setup": "npm run env && npm run docker-build && npm run up && npm run install && npm run migrate",
+        "docker-build": "docker compose build digital_library_api nginx",
+        "up":    "docker compose up -d digital_library_api nginx",
+        "stop":  "docker compose stop digital_library_api nginx",
+        "down":  "docker compose down",
+        "install": "docker compose exec digital_library_api composer install --no-interaction --prefer-dist --optimize-autoloader",
+        "env": "node -e \"const fs = require('fs'); if (!fs.existsSync('.env')) fs.copyFileSync('.env.dev', '.env')\"",
+        "migrate": "docker compose exec digital_library_api php artisan migrate:fresh --seed --force",
+        "test": "docker compose exec digital_library_api php artisan test",
+        "clear": "docker compose exec digital_library_api php artisan config:clear && docker compose exec digital_library_api php artisan cache:clear && docker compose exec digital_library_api php artisan route:clear",
+        "log": "docker compose exec digital_library_api tail -f storage/logs/laravel.log"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.0.0",
+        "axios": "^1.8.2",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^1.2.0",
+        "tailwindcss": "^4.0.0",
+        "vite": "^6.2.4"
+    }
+}

@@ -1,0 +1,64 @@
+services:
+
+    digital_library_api:
+        build:
+            context: ./
+            args:
+                user: hasib
+                uid: 1000
+            dockerfile: Dockerfile
+        working_dir: /var/www
+        environment:
+            - COMPOSER_MEMORY_LIMIT=-1
+        volumes:
+            - ./:/var/www
+            - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        depends_on:
+             mysql_DB:
+                condition: service_healthy
+        networks:
+            - optimalbyte
+
+    mysql_DB:
+        image: mysql:5.7
+        ports:
+            - "3308:3306"
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - dbdata:/var/lib/mysql
+            - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
+            - ./docker-compose/mysql/init:/docker-entrypoint-initdb.d
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', '127.0.0.1', '-u', 'root', '-p${DB_PASSWORD}']
+            interval: 5s
+            timeout: 5s
+            retries: 10
+        networks:
+            - optimalbyte
+
+    nginx:
+        image: nginx:alpine
+        ports:
+            - 8008:80
+        depends_on:
+            - mysql_DB
+            - digital_library_api
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+        networks:
+            - optimalbyte
+
+networks:
+    optimalbyte:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
