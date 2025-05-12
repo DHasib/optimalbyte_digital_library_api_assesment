@@ -22,13 +22,12 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 Route::middleware(['auth:sanctum', 'role:customer,admin'])->group(function () {
      Route::apiResource('bookshelves', BookshelfController::class)->only(['index', 'show']);
      Route::apiResource('books', BookController::class)->only(['index', 'show']);
-     Route::post('search', [BookController::class, 'search']);
-     Route::get('fullContent/{chapterId}', [ChapterController::class, 'fullContent']);
+     Route::post('books/search', [BookController::class, 'search']);
+     Route::get('chapters/{chapter}/full-content', [ChapterController::class, 'fullContent']);
      Route::apiResource('chapters', ChapterController::class)->only(['index', 'show']);
 
 
-});
-
+}); 
 
 Route::middleware(['auth:sanctum', 'role:employee'])->group(function () {
 
