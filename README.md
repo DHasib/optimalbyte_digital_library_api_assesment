@@ -63,7 +63,7 @@ When the command finishes, the API is available at **[http://localhost:8008](htt
 
 | Task                                    | NPM Script Command          |  
 | --------------------------------------- | --------------------------- |
-| Rebuild images after Dockerfile changes |  `npm run build`            |
+| Rebuild images after Dockerfile changes |  `npm run docker-build`     |
 | Start/stop containers                   |  `npm run up /npm run stop` |
 | Drop DB & reseed                        |  `npm run install`          |
 | Run PHPUnit test suite                  |  `npm run migrate`          |
