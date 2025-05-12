@@ -1,10 +1,11 @@
-# Sheba XYZ Booking API Assesment- Local Development Guide
+# Optimalbyte Digital library System API Assesment- Local Development Guide
 
-A simple Laravel-based RESTful API for managing  Digital library System in the optimalbyte Int. Assesment system.
+A simple Laravel-based RESTful API for managing Digital library System in the optimalbyte Int. Assesment system.
 
  
 
 This project ships with a **script** that hides almost every Docker / Laravel command you normally have to remember. After cloning, you can be up and running with **one line** to setup everything will be done by automation.
+**Note**  This project is Docker-based, so you must have Docker installed on your machine. If you’re using Docker Desktop, please ensure the Docker Desktop application is running.
 
 
 
@@ -27,7 +28,6 @@ This project ships with a **script** that hides almost every Docker / Laravel co
   - [Admin Credential](#admin-credential) 
   - [Postman Api Collections](#postman-api-collections)
   - [Project Entity Relationship Diagram (ERD)](#erd)  
-- [Running Tests](#running-tests)  
 
 
 ## Setup & Run Instructions
@@ -121,8 +121,8 @@ steps:
 
 Download and import these files into Postman:
 
-- [📥 Download Postman Api Collection JSON](https://github.com/DHasib/sheba_xyz_booking_api_assesment/releases/download/postman_api_collections_and_env_v0.0.1/booking_api_env.postman_environment_mdhasib522@gmail.com.json)
-- [📥 Download Postman Env JSON](https://github.com/DHasib/sheba_xyz_booking_api_assesment/releases/download/postman_api_collections_and_env_v0.0.1/Sheba.XYZ.Booking.API.Collections_mdhasib522@gmail.com.postman_collection.json)
+- [📥 Download Postman Api Collection JSON]
+- [📥 Download Postman Env JSON]
 
 **Instructions**
 
@@ -133,7 +133,7 @@ Download and import these files into Postman:
 3. Set:
    - `digital_library_api_url` → your API’s base URL (e.g. `http://localhost:8000`)
    - `token` → your JWT/Bearer token  
-4. Run the requests under **Sheba.XYZ Booking API**.
+4. Run the requests under **Digital Library Syaytem API**.
 
 ---
 
@@ -146,13 +146,3 @@ Download and import these files into Postman:
     alt="Project ERD"
   />
 </p>
-
-
-
-## Running-Tests
-
-**One‑shot To Run All the Test**
-
-```bash
-make test
-```
