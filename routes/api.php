@@ -4,26 +4,27 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AuthController,
     RoleController,
+    BookshelfController,
+    BookController,
+    ChapterController,
 };
 
 
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
-
     Route::apiResource('roles', RoleController::class);
+    Route::apiResource('bookshelves', BookshelfController::class)->except(['index', 'show']);
+    Route::apiResource('books', BookController::class)->except(['index', 'show']);
+    Route::apiResource('chapters', ChapterController::class)->except(['index', 'show']);
     Route::post('/register/employee', [AuthController::class, 'employeeRegistration']);
 });
 
 
-
-Route::middleware(['auth:sanctum', 'role:customer'])->group(function () {
-
-});
-
-
-
-
 Route::middleware(['auth:sanctum', 'role:customer,admin'])->group(function () {
-
+     Route::apiResource('bookshelves', BookshelfController::class)->only(['index', 'show']);
+     Route::apiResource('books', BookController::class)->only(['index', 'show']);
+     Route::post('search', [BookController::class, 'search']);
+     Route::get('fullContent/{chapterId}', [ChapterController::class, 'fullContent']);
+     Route::apiResource('chapters', ChapterController::class)->only(['index', 'show']);
 
 
 });
