@@ -35,19 +35,13 @@ This project ships with a **script** that hides almost every Docker / Laravel co
  **1 · Clone the repo**
 
 ```bash
-git clone https://github.com/DHasib/sheba_xyz_booking_api_assesment.git
-cd optimalbyte_digital_library_api_assesment_mdhasib522
+git clone https://github.com/DHasib/optimalbyte_digital_library_api_assesment.git
+cd optimalbyte_digital_library_api_assesment
 ```
 
 
 
-**2 · One‑shot setup (build → up → composer install → .env → migrate & seed)**
-
-```bash
-make setup
-```
-
-**2.1 . Option 2 (If You Have any problem to install throught make setup Used this script)**
+**2 · One‑shot setup ( .env → build → up → composer install → migrate & seed)**
 
 ```bash
 npm run setup
@@ -56,8 +50,8 @@ npm run setup
 Behind the scenes this will:
 
 1.  Copy `.env.dev → .env` if no `.env` exists
-2. `docker compose build booking_api & ngnix` – build the PHP/Laravel image
-3. `docker compose up -d booking_api & ngnix` – start the app & its dependencies
+2. `docker compose build digital_library_api & ngnix` – build the PHP/Laravel image
+3. `docker compose up -d digital_library_api & ngnix` – start the app & its dependencies
 4. `composer install` – inside the container
 5. `php artisan migrate:fresh --seed` – wipe & seed the database
 
@@ -67,15 +61,15 @@ When the command finishes, the API is available at **[http://localhost:8008](htt
 
 **3 · Daily workflow cheatsheet**
 
-| Task                                    | MAKE Command            | NPM Script Command          |  
-| --------------------------------------- | ----------------------- | --------------------------- |
-| Rebuild images after Dockerfile changes | `make build`            |  `npm run build`            |
-| Start/stop containers                   | `make up` / `make stop` |  `npm run up /npm run stop` |
-| Drop DB & reseed                        | `make migrate`          |  `npm run install`          |
-| Run PHPUnit test suite                  | `make test`             |  `npm run migrate`          |
-| Clear Laravel caches                    | `make clear`            |  `npm run test`             |
-| Tail the Laravel log                    | `make log`              |  `npm run clear`            |
-| Tear everything down                    | `make down`             |  `npm run log`              |
+| Task                                    | NPM Script Command          |  
+| --------------------------------------- | --------------------------- |
+| Rebuild images after Dockerfile changes |  `npm run build`            |
+| Start/stop containers                   |  `npm run up /npm run stop` |
+| Drop DB & reseed                        |  `npm run install`          |
+| Run PHPUnit test suite                  |  `npm run migrate`          |
+| Clear Laravel caches                    |  `npm run test`             |
+| Tail the Laravel log                    |  `npm run clear`            |
+| Tear everything down                    |  `npm run log`              |
 
 > You can override the container name on the fly:<br>`SERVICE=my_alt_service make migrate`
 
@@ -86,9 +80,9 @@ When the command finishes, the API is available at **[http://localhost:8008](htt
 ### Containers can’t see MySQL (`getaddrinfo ENOTFOUND mysqlDB`)
 
 * Ensure `DB_HOST` in `.env` matches the DB service in `docker‑compose.yml` (e.g. `mysqlDB`).
-* The DB service **must** have a health‑check, and `booking_api` should have `depends_on: condition: service_healthy`.
+* The DB service **must** have a health‑check, and `digital_library_api` should have `depends_on: condition: service_healthy`.
 
-### Composer memory errors during `make setup`
+### Composer memory errors during `npm run setup`
 
 Use the **swapfile** setting in Docker Desktop (or allocate more memory) – Laravel’s optimized autoloader needs \~1 GB during the install.
 
@@ -133,11 +127,11 @@ Download and import these files into Postman:
 **Instructions**
 
 1. In Postman click **Import → File**, and select:
-   - `Sheba.XYZ Booking API Collections_mdhasib522@gmail.com.postman_collection.json`  
-   - `booking_api_env.postman_environment_mdhasib522@gmail.com.json`
-2. In the top-right of Postman, choose the **booking_api_env** environment.
+   - `Collections_mdhasib522@gmail.com.postman_collection.json`  
+   - `.postman_environment_mdhasib522@gmail.com.json`
+2. In the top-right of Postman, choose the **digital_library_api_env** environment.
 3. Set:
-   - `booking_api_url` → your API’s base URL (e.g. `http://localhost:8000`)
+   - `digital_library_api_url` → your API’s base URL (e.g. `http://localhost:8000`)
    - `token` → your JWT/Bearer token  
 4. Run the requests under **Sheba.XYZ Booking API**.
 
@@ -147,7 +141,7 @@ Download and import these files into Postman:
 ## ERD
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/DHasib/sheba_xyz_booking_api_assesment/main/Booking_ERD.png"
+    src="https://raw.githubusercontent.com/DHasib/optimalbyte_digital_library_api_assesment/main/Digital_Library_ERD.png"
     width="400"
     alt="Project ERD"
   />
