@@ -20,6 +20,12 @@ class ChapterController extends Controller
      */
     public function index($bookId)
     {
+        // Validate the bookId
+        if (!is_numeric($bookId) || $bookId <= 0) {
+            return response()->json(['success'=>false,'message'=>'Invalid book ID'],400);
+        } else if (Chapter::where('book_id',$bookId)->count() == 0) {
+            return response()->json(['success'=>false,'message'=>'There are no chapters in this book'],404);
+        }
         $chapters = Chapter::where('book_id', $bookId)
                            ->orderBy('chapter_number')
                            ->get();
@@ -43,16 +49,19 @@ class ChapterController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException If validation of the input data fails.
      */
-    public function store(Request $req) {
-        $data = $req->validate([
-            'title'          => 'required|string|max:255',
-            'chapter_number' => 'required|integer|min:1',
-            'book_id'        => 'required|exists:books,id',
+    public function store(Request $req, $bookId) {
+        try {
+            $data = $req->validate([
+                'title'          => 'required|string|max:255',
+                'chapter_number' => 'required|integer|min:1',
+            ]);
 
+            $chapter = Chapter::create(array_merge($data, ['book_id' => $bookId]));
+            return response()->json(['success'=>true,'data'=>$chapter],201);
 
-        ]);
-        $chapter = Chapter::create($data);
-        return response()->json(['success'=>true,'data'=>$chapter],201);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['success'=>false,'message'=>'Book not found'],404);
+        }
     }
 
     /**
@@ -66,11 +75,13 @@ class ChapterController extends Controller
      * @param int $id The unique identifier of the chapter.
      * @return \Illuminate\Http\JsonResponse JSON response containing either the chapter data or an error message.
      */
-    public function show($id)
+    public function show($bookId, $id)
     {
         try {
             $ch = Chapter::with('pages')
+                         ->where('book_id',$bookId)
                          ->findOrFail($id);
+
             return response()->json(['success'=>true,'data'=>$ch]);
         } catch (ModelNotFoundException $e) {
             return response()->json(['success'=>false,'message'=>'Chapter not found'],404);
@@ -98,17 +109,14 @@ class ChapterController extends Controller
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException When the chapter with the specified 'id' and 'book_id' is not found.
      */
-    public function update(Request $req, $id)
+    public function update(Request $req,$bookId,$id)
     {
         try {
             $data = $req->validate([
                 'title'          => 'sometimes|required|string|max:255',
                 'chapter_number' => 'sometimes|required|integer|min:1',
-                'book_id'        => 'sometimes|required|exists:books,id',
             ]);
-            $bookId = $data['book_id'];
             $ch = Chapter::where('book_id',$bookId)->findOrFail($id);
-
             $ch->update($data);
             return response()->json(['success'=>true,'data'=>$ch]);
         } catch (ModelNotFoundException $e) {
@@ -130,10 +138,10 @@ class ChapterController extends Controller
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Thrown when the chapter with the given ID does not exist.
      */
-    public function destroy($id)
+    public function destroy($bookId, $id)
     {
         try {
-            $ch = Chapter::findOrFail($id);
+            $ch = Chapter::where('book_id', $bookId)->findOrFail($id);
             $ch->delete();
             return response()->json(['success'=>true,'message'=>'Deleted']);
         } catch (ModelNotFoundException $e) {

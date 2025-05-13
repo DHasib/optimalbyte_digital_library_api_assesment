@@ -1,0 +1,2545 @@
+{
+	"info": {
+		"_postman_id": "682f2efd-ec8c-4906-8f8a-45d83f271e9f",
+		"name": "Optimalbyte Digital library System API Collections",
+		"description": "This template contains a boilerplate for documentation that you can quickly customize and reuse.\n\n### How to use this template:\n\n- Replace the content given brackets (()) with your API's details.\n- Tips are formatted in `codespan` - feel free to read and remove them.\n    \n\n---\n\n`Start with a brief overview of what your API offers.`\n\nThe ((product name)) provides many API products, tools, and resources that enable you to ((add product value here)).\n\n`You can also list the APIs you offer, link to the relevant pages, or do both in this section.`\n\n## **Getting started guide**\n\n`List the steps or points required to start using your APIs. Make sure to cover everything required to reach success with your API as quickly as possible.`\n\nTo start using the ((add APIs here)), you need to -\n\n`The points given below are from The Postman API's documentation. You can reference it to write your own getting started guide.`\n\n- You must use a valid API Key to send requests to the API endpoints. You can get your API key from Postman's [integrations dashboard](https://go.postman.co/settings/me/api-keys).\n- The API has [rate and usage limits](https://learning.postman.com/docs/developer/postman-api/postman-api-rate-limits/).\n- The API only responds to HTTPS-secured communications. Any requests sent via HTTP return an HTTP 301 redirect to the corresponding HTTPS resources.\n- The API returns request responses in JSON format. When an API request returns an error, it is sent in the JSON response as an error key.\n    \n\n## Authentication\n\n`Add details on the authorization keys/tokens required, steps that cover how to get them, and the relevant error codes.`\n\nThe ((product name)) API uses ((add your API's authorization type)) for authentication.\n\n`The details given below are from the Postman API's documentation. You can reference it to write your own authentication section.`\n\nPostman uses API keys for authentication. You can generate a Postman API key in the [API keys](https://postman.postman.co/settings/me/api-keys) section of your Postman account settings.\n\nYou must include an API key in each request to the Postman API with the X-Api-Key request header.\n\n### Authentication error response\n\nIf an API key is missing, malformed, or invalid, you will receive an HTTP 401 Unauthorized response code.\n\n## Rate and usage limits\n\n`Use this section to cover your APIs' terms of use. Include API limits, constraints, and relevant error codes, so consumers understand the permitted API usage and practices.`\n\n`The example given below is from The Postman API's documentation. Use it as a reference to write your APIs' terms of use.`\n\nAPI access rate limits apply at a per-API key basis in unit time. The limit is 300 requests per minute. Also, depending on your plan, you may have usage limits. If you exceed either limit, your request will return an HTTP 429 Too Many Requests status code.\n\nEach API response returns the following set of headers to help you identify your use status:\n\n| Header | Description |\n| --- | --- |\n| `X-RateLimit-Limit` | The maximum number of requests that the consumer is permitted to make per minute. |\n| `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window. |\n| `X-RateLimit-Reset` | The time at which the current rate limit window resets in UTC epoch seconds. |\n\n### 503 response\n\nAn HTTP `503` response from our servers indicates there is an unexpected spike in API access traffic. The server is usually operational within the next five minutes. If the outage persists or you receive any other form of an HTTP `5XX` error, [contact support](https://support.postman.com/hc/en-us/requests/new/).\n\n### **Need some help?**\n\n`Add links that customers can refer to whenever they need help.`\n\nIn case you have questions, go through our tutorials ((link to your video or help documentation here)). Or visit our FAQ page ((link to the relevant page)).\n\nOr you can check out our community forum, there’s a good chance our community has an answer for you. Visit our developer forum ((link to developer forum)) to review topics, ask questions, and learn from others.\n\n`You can also document or add links to libraries, code examples, and other resources needed to make a request.`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37366320",
+		"_collection_link": "https://lively-eclipse-492292.postman.co/workspace/optimalbyte_digital_library_api~104ac576-866c-41e9-b87d-10bb10e5f264/collection/37366320-682f2efd-ec8c-4906-8f8a-45d83f271e9f?action=share&source=collection_link&creator=37366320"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"hasib2\",\r\n    \"email\": \"hasib2@gmail.com\",\r\n    \"phone\": \"05487252585\",\r\n    \"password\": \"P@ssword\",\r\n    \"password_confirmation\": \"P@ssword\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/register",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": 12345678,\n        \"username\": \"taylor-lee\",\n        \"email\": \"taylor.lee@example.com\",\n        \"fullName\": \"Taylor Lee\",\n        \"avatar\": \"https://example.com/user/r5u9qpvmujfjf6lbqmga.jpg\",\n        \"isPublic\": true\n    },\n    \"operations\": [\n        {\n            \"name\": \"mock_usage\",\n            \"limit\": 1000000,\n            \"usage\": 110276,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"monitor_request_runs\",\n            \"limit\": 10000000,\n            \"usage\": 1141750,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"api_usage\",\n            \"limit\": 1000000,\n            \"usage\": 16240,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"custom_domains\",\n            \"limit\": 25,\n            \"usage\": 25,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"serverless_requests\",\n            \"limit\": 10000,\n            \"usage\": 0,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"integrations\",\n            \"limit\": 5000,\n            \"usage\": 1018,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"cloud_agent_requests\",\n            \"limit\": 1000000,\n            \"usage\": 1615,\n            \"overage\": 0\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register Employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"hasib\",\r\n    \"email\": \"employee2@gmail.com\",\r\n    \"phone\": \"5487252585\",\r\n    \"password\": \"P@ssword\",\r\n    \"password_confirmation\": \"P@ssword\",\r\n    \"role_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/register/employee",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/register/employee"
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized. Insufficient permissions to access this resource.\"\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    // \"email\": \"beahan.vada@example.net\",//employee\r\n    // \"email\": \"joshuah49@example.org\",//customer\r\n    \"password\": \"P@ssword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/login",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful\",\n    \"access_token\": \"4|8IcmWq4O7pK0HsLfVh74lK2dKsLyAoQw2bBbwnCoc0278449\",\n    \"user\": {\n        \"id\": 31,\n        \"name\": \"admin\",\n        \"email\": \"admin@example.com\",\n        \"address\": \"123 Admin St\",\n        \"phone\": \"123-456-7890\",\n        \"role_id\": 1,\n        \"role_name\": \"admin\"\n    },\n    \"token_type\": \"Bearer\",\n    \"expires_at\": \"2025-05-12 21:08:29\"\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{library_api_url}}/api/logout",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/logout"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logged out successfully\"\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "User Roles",
+			"item": [
+				{
+					"name": "Get Roles Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{library_api_url}}/api/roles",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/roles"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"current_page\": 1,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"admin\",\n            \"description\": \"Et quia quidem dignissimos laborum accusamus quis praesentium aspernatur.\",\n            \"created_at\": \"2025-05-12T14:26:45.000000Z\",\n            \"updated_at\": \"2025-05-12T14:26:45.000000Z\",\n            \"users_count\": 3\n        },\n        {\n            \"id\": 2,\n            \"name\": \"employee\",\n            \"description\": \"Perspiciatis provident optio aperiam.\",\n            \"created_at\": \"2025-05-12T14:26:45.000000Z\",\n            \"updated_at\": \"2025-05-12T14:26:45.000000Z\",\n            \"users_count\": 8\n        },\n        {\n            \"id\": 3,\n            \"name\": \"customer\",\n            \"description\": \"Quia alias voluptate dolores perspiciatis ab asperiores.\",\n            \"created_at\": \"2025-05-12T14:26:45.000000Z\",\n            \"updated_at\": \"2025-05-12T14:26:45.000000Z\",\n            \"users_count\": 21\n        }\n    ],\n    \"first_page_url\": \"http://127.0.0.1:8008/api/roles?page=1\",\n    \"from\": 1,\n    \"last_page\": 1,\n    \"last_page_url\": \"http://127.0.0.1:8008/api/roles?page=1\",\n    \"links\": [\n        {\n            \"url\": null,\n            \"label\": \"&laquo; Previous\",\n            \"active\": false\n        },\n        {\n            \"url\": \"http://127.0.0.1:8008/api/roles?page=1\",\n            \"label\": \"1\",\n            \"active\": true\n        },\n        {\n            \"url\": null,\n            \"label\": \"Next &raquo;\",\n            \"active\": false\n        }\n    ],\n    \"next_page_url\": null,\n    \"path\": \"http://127.0.0.1:8008/api/roles\",\n    \"per_page\": 50,\n    \"prev_page_url\": null,\n    \"to\": 3,\n    \"total\": 3\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a Role Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"hasib\",\r\n    \"email\": \"employee2@gmail.com\",\r\n    \"phone\": \"5487252585\",\r\n    \"password\": \"P@ssword\",\r\n    \"password_confirmation\": \"P@ssword\",\r\n    \"role_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/roles/1",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/register/employee"
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"admin\",\n    \"description\": \"Et quia quidem dignissimos laborum accusamus quis praesentium aspernatur.\",\n    \"created_at\": \"2025-05-12T14:26:45.000000Z\",\n    \"updated_at\": \"2025-05-12T14:26:45.000000Z\",\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"Holden Yost\",\n            \"email\": \"syble70@example.org\",\n            \"role_id\": 1\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Dolores Ziemann Sr.\",\n            \"email\": \"stephen07@example.com\",\n            \"role_id\": 1\n        },\n        {\n            \"id\": 31,\n            \"name\": \"admin\",\n            \"email\": \"admin@example.com\",\n            \"role_id\": 1\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a Role Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"test2\",\r\n  \"description\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/roles",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"test3\",\r\n  \"description\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/roles"
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Role created successfully.\",\n    \"role\": {\n        \"name\": \"test3\",\n        \"description\": \"Comprehensive upholstery.\",\n        \"updated_at\": \"2025-05-13T01:24:34.000000Z\",\n        \"created_at\": \"2025-05-13T01:24:34.000000Z\",\n        \"id\": 6\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a Role Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"test2\",\r\n  \"description\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/roles",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"test50\",\r\n  \"description\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/roles/4"
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Role updated successfully.\",\n    \"role\": {\n        \"id\": 4,\n        \"name\": \"test50\",\n        \"description\": \"Comprehensive upholstery.\",\n        \"created_at\": \"2025-05-13T01:19:09.000000Z\",\n        \"updated_at\": \"2025-05-13T01:26:31.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a Role Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"test2\",\r\n  \"description\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/roles/4",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"test50\",\r\n  \"description\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/roles/4"
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "Bookshelf",
+			"item": [
+				{
+					"name": "Get Bookshelves Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{library_api_url}}/api/bookshelves",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"beatae Shelf\",\n            \"location\": \"South Marina\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"laboriosam Shelf\",\n            \"location\": \"Hintzstad\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"modi Shelf\",\n            \"location\": \"South Maximusville\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        },\n        {\n            \"id\": 1,\n            \"name\": \"sit Shelf\",\n            \"location\": \"East Arveltown\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"sit Shelf\",\n            \"location\": \"North Phoebe\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a Bookshelf Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{library_api_url}}/api/bookshelves/1",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"sit Shelf\",\n        \"location\": \"East Arveltown\",\n        \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"updated_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"books\": [\n            {\n                \"id\": 1,\n                \"bookshelf_id\": 1,\n                \"title\": \"Voluptate tempore et.\",\n                \"author\": \"Mr. Maxine Boehm II\",\n                \"published_year\": \"1991\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 2,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui omnis corrupti.\",\n                \"author\": \"Coralie Blick I\",\n                \"published_year\": \"2006\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 3,\n                \"bookshelf_id\": 1,\n                \"title\": \"Enim id et.\",\n                \"author\": \"Prof. Colton Lind Jr.\",\n                \"published_year\": \"1991\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 4,\n                \"bookshelf_id\": 1,\n                \"title\": \"Vel accusamus pariatur praesentium.\",\n                \"author\": \"Juvenal Block\",\n                \"published_year\": \"1990\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 5,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quia qui maiores.\",\n                \"author\": \"Arnold Zieme MD\",\n                \"published_year\": \"2012\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 6,\n                \"bookshelf_id\": 1,\n                \"title\": \"Alias non sunt.\",\n                \"author\": \"Dejah Konopelski\",\n                \"published_year\": \"2022\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 7,\n                \"bookshelf_id\": 1,\n                \"title\": \"Enim aspernatur quod omnis ipsum.\",\n                \"author\": \"Prof. Dagmar Quitzon\",\n                \"published_year\": \"1975\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 8,\n                \"bookshelf_id\": 1,\n                \"title\": \"Accusantium officia sequi et eligendi.\",\n                \"author\": \"Madonna Runolfsson I\",\n                \"published_year\": \"2008\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 9,\n                \"bookshelf_id\": 1,\n                \"title\": \"Ducimus accusantium nam quos dolores.\",\n                \"author\": \"Mr. Austen Smith IV\",\n                \"published_year\": \"2008\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 10,\n                \"bookshelf_id\": 1,\n                \"title\": \"Est minus.\",\n                \"author\": \"Laurine Weimann I\",\n                \"published_year\": \"1985\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 11,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui omnis et id.\",\n                \"author\": \"Titus Hagenes\",\n                \"published_year\": \"2005\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 12,\n                \"bookshelf_id\": 1,\n                \"title\": \"Itaque amet ducimus.\",\n                \"author\": \"Dr. Fermin VonRueden I\",\n                \"published_year\": \"2024\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 13,\n                \"bookshelf_id\": 1,\n                \"title\": \"Nemo molestiae numquam harum.\",\n                \"author\": \"Dr. Kenna Keeling\",\n                \"published_year\": \"1995\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 14,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quo reiciendis quia.\",\n                \"author\": \"Prof. Orlando Lubowitz Sr.\",\n                \"published_year\": \"2016\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 15,\n                \"bookshelf_id\": 1,\n                \"title\": \"Vel non enim sapiente.\",\n                \"author\": \"Cayla Murray\",\n                \"published_year\": \"1980\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 16,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quis assumenda enim doloremque.\",\n                \"author\": \"Mrs. Lilla Little DVM\",\n                \"published_year\": \"2013\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 17,\n                \"bookshelf_id\": 1,\n                \"title\": \"Rerum est ea.\",\n                \"author\": \"Miss Trycia Haag\",\n                \"published_year\": \"2000\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 18,\n                \"bookshelf_id\": 1,\n                \"title\": \"Eum neque ipsum.\",\n                \"author\": \"Dr. Valentin Morissette\",\n                \"published_year\": \"1974\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 19,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quas esse quod hic.\",\n                \"author\": \"Prof. Caitlyn Ullrich II\",\n                \"published_year\": \"1988\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 20,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui iusto asperiores minus quam.\",\n                \"author\": \"Nicklaus Kessler\",\n                \"published_year\": \"2001\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a Bookshelf Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"bookself dhaka\",\r\n  \"location\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/bookshelves",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"bookself dhaka\",\r\n  \"location\": \"Comprehensive upholstery.\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/bookshelves"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"bookself dhaka\",\n  \"location\": \"Comprehensive upholstery.\"\n\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a Bookshelf Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"success\": true,\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"name\": \"bookself test\",\r\n        \"location\": \"Comprehensive upholstery.\",\r\n        \"created_at\": \"2025-05-13T01:55:08.000000Z\",\r\n        \"updated_at\": \"2025-05-13T02:08:58.000000Z\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/bookshelves/1",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"bookself test\",\r\n  \"location\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/bookshelves/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"bookself test\",\n        \"location\": \"Comprehensive upholstery.\",\n        \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"updated_at\": \"2025-05-13T02:08:58.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a Bookshelf Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{library_api_url}}/api/bookshelves/4",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/5"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"success\": true,\r\n    \"message\": \"Deleted\"\r\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "Bookshelf Books",
+			"item": [
+				{
+					"name": "Get Bookshelf Books Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{library_api_url}}/api/bookshelves/1/books",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/1/books"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"beatae Shelf\",\n            \"location\": \"South Marina\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"bookself dhaka\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T02:04:42.000000Z\",\n            \"updated_at\": \"2025-05-13T02:04:42.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"bookself dhaka\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T02:05:14.000000Z\",\n            \"updated_at\": \"2025-05-13T02:05:14.000000Z\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"bookself dhaka\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T02:06:27.000000Z\",\n            \"updated_at\": \"2025-05-13T02:06:27.000000Z\"\n        },\n        {\n            \"id\": 1,\n            \"name\": \"bookself test\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T02:08:58.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"sit Shelf\",\n            \"location\": \"North Phoebe\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a Bookshelf Book Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{library_api_url}}/api/bookshelves/1/books/1",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"sit Shelf\",\n        \"location\": \"East Arveltown\",\n        \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"updated_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"books\": [\n            {\n                \"id\": 1,\n                \"bookshelf_id\": 1,\n                \"title\": \"Voluptate tempore et.\",\n                \"author\": \"Mr. Maxine Boehm II\",\n                \"published_year\": \"1991\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 2,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui omnis corrupti.\",\n                \"author\": \"Coralie Blick I\",\n                \"published_year\": \"2006\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 3,\n                \"bookshelf_id\": 1,\n                \"title\": \"Enim id et.\",\n                \"author\": \"Prof. Colton Lind Jr.\",\n                \"published_year\": \"1991\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 4,\n                \"bookshelf_id\": 1,\n                \"title\": \"Vel accusamus pariatur praesentium.\",\n                \"author\": \"Juvenal Block\",\n                \"published_year\": \"1990\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 5,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quia qui maiores.\",\n                \"author\": \"Arnold Zieme MD\",\n                \"published_year\": \"2012\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 6,\n                \"bookshelf_id\": 1,\n                \"title\": \"Alias non sunt.\",\n                \"author\": \"Dejah Konopelski\",\n                \"published_year\": \"2022\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 7,\n                \"bookshelf_id\": 1,\n                \"title\": \"Enim aspernatur quod omnis ipsum.\",\n                \"author\": \"Prof. Dagmar Quitzon\",\n                \"published_year\": \"1975\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 8,\n                \"bookshelf_id\": 1,\n                \"title\": \"Accusantium officia sequi et eligendi.\",\n                \"author\": \"Madonna Runolfsson I\",\n                \"published_year\": \"2008\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 9,\n                \"bookshelf_id\": 1,\n                \"title\": \"Ducimus accusantium nam quos dolores.\",\n                \"author\": \"Mr. Austen Smith IV\",\n                \"published_year\": \"2008\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 10,\n                \"bookshelf_id\": 1,\n                \"title\": \"Est minus.\",\n                \"author\": \"Laurine Weimann I\",\n                \"published_year\": \"1985\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 11,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui omnis et id.\",\n                \"author\": \"Titus Hagenes\",\n                \"published_year\": \"2005\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 12,\n                \"bookshelf_id\": 1,\n                \"title\": \"Itaque amet ducimus.\",\n                \"author\": \"Dr. Fermin VonRueden I\",\n                \"published_year\": \"2024\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 13,\n                \"bookshelf_id\": 1,\n                \"title\": \"Nemo molestiae numquam harum.\",\n                \"author\": \"Dr. Kenna Keeling\",\n                \"published_year\": \"1995\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 14,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quo reiciendis quia.\",\n                \"author\": \"Prof. Orlando Lubowitz Sr.\",\n                \"published_year\": \"2016\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 15,\n                \"bookshelf_id\": 1,\n                \"title\": \"Vel non enim sapiente.\",\n                \"author\": \"Cayla Murray\",\n                \"published_year\": \"1980\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 16,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quis assumenda enim doloremque.\",\n                \"author\": \"Mrs. Lilla Little DVM\",\n                \"published_year\": \"2013\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 17,\n                \"bookshelf_id\": 1,\n                \"title\": \"Rerum est ea.\",\n                \"author\": \"Miss Trycia Haag\",\n                \"published_year\": \"2000\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 18,\n                \"bookshelf_id\": 1,\n                \"title\": \"Eum neque ipsum.\",\n                \"author\": \"Dr. Valentin Morissette\",\n                \"published_year\": \"1974\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 19,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quas esse quod hic.\",\n                \"author\": \"Prof. Caitlyn Ullrich II\",\n                \"published_year\": \"1988\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 20,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui iusto asperiores minus quam.\",\n                \"author\": \"Nicklaus Kessler\",\n                \"published_year\": \"2001\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a Bookshelf Book Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"bookself dhaka\",\r\n  \"author\": \"Comprehensive upholstery.\",\r\n  \"published_year\": 2025\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/bookshelves/1/books",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"bookself dhaka\",\r\n  \"location\": \"Comprehensive upholstery.\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/bookshelves"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"bookself dhaka\",\n  \"location\": \"Comprehensive upholstery.\"\n\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a Bookshelf Book Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"dhaka\",\r\n  \"author\": \"Comprehensive upholstery.\",\r\n  \"published_year\": 2026\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/bookshelves/1/books/1",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"bookself test\",\r\n  \"location\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/bookshelves/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"bookself test\",\n        \"location\": \"Comprehensive upholstery.\",\n        \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"updated_at\": \"2025-05-13T02:08:58.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a Bookshelf Book Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{library_api_url}}/api/bookshelves/1/books/1",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/5"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"success\": true,\r\n    \"message\": \"Deleted\"\r\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "Book Chapters",
+			"item": [
+				{
+					"name": "Get Book Chapters Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{library_api_url}}/api/books/3/chapters",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/1/books"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"beatae Shelf\",\n            \"location\": \"South Marina\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"bookself dhaka\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T02:04:42.000000Z\",\n            \"updated_at\": \"2025-05-13T02:04:42.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"bookself dhaka\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T02:05:14.000000Z\",\n            \"updated_at\": \"2025-05-13T02:05:14.000000Z\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"bookself dhaka\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T02:06:27.000000Z\",\n            \"updated_at\": \"2025-05-13T02:06:27.000000Z\"\n        },\n        {\n            \"id\": 1,\n            \"name\": \"bookself test\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T02:08:58.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"sit Shelf\",\n            \"location\": \"North Phoebe\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Book Chapter Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{library_api_url}}/api/books/1/chapters/1",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"sit Shelf\",\n        \"location\": \"East Arveltown\",\n        \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"updated_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"books\": [\n            {\n                \"id\": 1,\n                \"bookshelf_id\": 1,\n                \"title\": \"Voluptate tempore et.\",\n                \"author\": \"Mr. Maxine Boehm II\",\n                \"published_year\": \"1991\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 2,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui omnis corrupti.\",\n                \"author\": \"Coralie Blick I\",\n                \"published_year\": \"2006\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 3,\n                \"bookshelf_id\": 1,\n                \"title\": \"Enim id et.\",\n                \"author\": \"Prof. Colton Lind Jr.\",\n                \"published_year\": \"1991\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 4,\n                \"bookshelf_id\": 1,\n                \"title\": \"Vel accusamus pariatur praesentium.\",\n                \"author\": \"Juvenal Block\",\n                \"published_year\": \"1990\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 5,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quia qui maiores.\",\n                \"author\": \"Arnold Zieme MD\",\n                \"published_year\": \"2012\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 6,\n                \"bookshelf_id\": 1,\n                \"title\": \"Alias non sunt.\",\n                \"author\": \"Dejah Konopelski\",\n                \"published_year\": \"2022\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 7,\n                \"bookshelf_id\": 1,\n                \"title\": \"Enim aspernatur quod omnis ipsum.\",\n                \"author\": \"Prof. Dagmar Quitzon\",\n                \"published_year\": \"1975\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 8,\n                \"bookshelf_id\": 1,\n                \"title\": \"Accusantium officia sequi et eligendi.\",\n                \"author\": \"Madonna Runolfsson I\",\n                \"published_year\": \"2008\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 9,\n                \"bookshelf_id\": 1,\n                \"title\": \"Ducimus accusantium nam quos dolores.\",\n                \"author\": \"Mr. Austen Smith IV\",\n                \"published_year\": \"2008\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 10,\n                \"bookshelf_id\": 1,\n                \"title\": \"Est minus.\",\n                \"author\": \"Laurine Weimann I\",\n                \"published_year\": \"1985\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 11,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui omnis et id.\",\n                \"author\": \"Titus Hagenes\",\n                \"published_year\": \"2005\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 12,\n                \"bookshelf_id\": 1,\n                \"title\": \"Itaque amet ducimus.\",\n                \"author\": \"Dr. Fermin VonRueden I\",\n                \"published_year\": \"2024\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 13,\n                \"bookshelf_id\": 1,\n                \"title\": \"Nemo molestiae numquam harum.\",\n                \"author\": \"Dr. Kenna Keeling\",\n                \"published_year\": \"1995\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 14,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quo reiciendis quia.\",\n                \"author\": \"Prof. Orlando Lubowitz Sr.\",\n                \"published_year\": \"2016\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 15,\n                \"bookshelf_id\": 1,\n                \"title\": \"Vel non enim sapiente.\",\n                \"author\": \"Cayla Murray\",\n                \"published_year\": \"1980\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 16,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quis assumenda enim doloremque.\",\n                \"author\": \"Mrs. Lilla Little DVM\",\n                \"published_year\": \"2013\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 17,\n                \"bookshelf_id\": 1,\n                \"title\": \"Rerum est ea.\",\n                \"author\": \"Miss Trycia Haag\",\n                \"published_year\": \"2000\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 18,\n                \"bookshelf_id\": 1,\n                \"title\": \"Eum neque ipsum.\",\n                \"author\": \"Dr. Valentin Morissette\",\n                \"published_year\": \"1974\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 19,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quas esse quod hic.\",\n                \"author\": \"Prof. Caitlyn Ullrich II\",\n                \"published_year\": \"1988\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 20,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui iusto asperiores minus quam.\",\n                \"author\": \"Nicklaus Kessler\",\n                \"published_year\": \"2001\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a Book  Chapter Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"bookself dhaka\",\r\n  \"chapter_number\":1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/books/1/chapters",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"bookself dhaka\",\r\n  \"location\": \"Comprehensive upholstery.\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/bookshelves"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"bookself dhaka\",\n  \"location\": \"Comprehensive upholstery.\"\n\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a Book Chapter Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"bookself dhaka  gn\",\r\n  \"chapter_number\":1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/books/1/chapters/1",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"bookself test\",\r\n  \"location\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/bookshelves/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"bookself test\",\n        \"location\": \"Comprehensive upholstery.\",\n        \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"updated_at\": \"2025-05-13T02:08:58.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a Book Chapter Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{library_api_url}}/api/books/1/chapters/1",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/5"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"success\": true,\r\n    \"message\": \"Deleted\"\r\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "Chapter Pages",
+			"item": [
+				{
+					"name": "Get a Chapter Pages Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{library_api_url}}/api/chapters/2/pages",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/1/books"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"beatae Shelf\",\n            \"location\": \"South Marina\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"bookself dhaka\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T02:04:42.000000Z\",\n            \"updated_at\": \"2025-05-13T02:04:42.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"bookself dhaka\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T02:05:14.000000Z\",\n            \"updated_at\": \"2025-05-13T02:05:14.000000Z\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"bookself dhaka\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T02:06:27.000000Z\",\n            \"updated_at\": \"2025-05-13T02:06:27.000000Z\"\n        },\n        {\n            \"id\": 1,\n            \"name\": \"bookself test\",\n            \"location\": \"Comprehensive upholstery.\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T02:08:58.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"sit Shelf\",\n            \"location\": \"North Phoebe\",\n            \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n            \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a Chapter Page Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{library_api_url}}/api/chapters/2/pages/8",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"sit Shelf\",\n        \"location\": \"East Arveltown\",\n        \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"updated_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"books\": [\n            {\n                \"id\": 1,\n                \"bookshelf_id\": 1,\n                \"title\": \"Voluptate tempore et.\",\n                \"author\": \"Mr. Maxine Boehm II\",\n                \"published_year\": \"1991\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 2,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui omnis corrupti.\",\n                \"author\": \"Coralie Blick I\",\n                \"published_year\": \"2006\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 3,\n                \"bookshelf_id\": 1,\n                \"title\": \"Enim id et.\",\n                \"author\": \"Prof. Colton Lind Jr.\",\n                \"published_year\": \"1991\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 4,\n                \"bookshelf_id\": 1,\n                \"title\": \"Vel accusamus pariatur praesentium.\",\n                \"author\": \"Juvenal Block\",\n                \"published_year\": \"1990\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 5,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quia qui maiores.\",\n                \"author\": \"Arnold Zieme MD\",\n                \"published_year\": \"2012\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 6,\n                \"bookshelf_id\": 1,\n                \"title\": \"Alias non sunt.\",\n                \"author\": \"Dejah Konopelski\",\n                \"published_year\": \"2022\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 7,\n                \"bookshelf_id\": 1,\n                \"title\": \"Enim aspernatur quod omnis ipsum.\",\n                \"author\": \"Prof. Dagmar Quitzon\",\n                \"published_year\": \"1975\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 8,\n                \"bookshelf_id\": 1,\n                \"title\": \"Accusantium officia sequi et eligendi.\",\n                \"author\": \"Madonna Runolfsson I\",\n                \"published_year\": \"2008\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 9,\n                \"bookshelf_id\": 1,\n                \"title\": \"Ducimus accusantium nam quos dolores.\",\n                \"author\": \"Mr. Austen Smith IV\",\n                \"published_year\": \"2008\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 10,\n                \"bookshelf_id\": 1,\n                \"title\": \"Est minus.\",\n                \"author\": \"Laurine Weimann I\",\n                \"published_year\": \"1985\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 11,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui omnis et id.\",\n                \"author\": \"Titus Hagenes\",\n                \"published_year\": \"2005\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 12,\n                \"bookshelf_id\": 1,\n                \"title\": \"Itaque amet ducimus.\",\n                \"author\": \"Dr. Fermin VonRueden I\",\n                \"published_year\": \"2024\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 13,\n                \"bookshelf_id\": 1,\n                \"title\": \"Nemo molestiae numquam harum.\",\n                \"author\": \"Dr. Kenna Keeling\",\n                \"published_year\": \"1995\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 14,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quo reiciendis quia.\",\n                \"author\": \"Prof. Orlando Lubowitz Sr.\",\n                \"published_year\": \"2016\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 15,\n                \"bookshelf_id\": 1,\n                \"title\": \"Vel non enim sapiente.\",\n                \"author\": \"Cayla Murray\",\n                \"published_year\": \"1980\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 16,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quis assumenda enim doloremque.\",\n                \"author\": \"Mrs. Lilla Little DVM\",\n                \"published_year\": \"2013\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 17,\n                \"bookshelf_id\": 1,\n                \"title\": \"Rerum est ea.\",\n                \"author\": \"Miss Trycia Haag\",\n                \"published_year\": \"2000\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 18,\n                \"bookshelf_id\": 1,\n                \"title\": \"Eum neque ipsum.\",\n                \"author\": \"Dr. Valentin Morissette\",\n                \"published_year\": \"1974\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 19,\n                \"bookshelf_id\": 1,\n                \"title\": \"Quas esse quod hic.\",\n                \"author\": \"Prof. Caitlyn Ullrich II\",\n                \"published_year\": \"1988\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            },\n            {\n                \"id\": 20,\n                \"bookshelf_id\": 1,\n                \"title\": \"Qui iusto asperiores minus quam.\",\n                \"author\": \"Nicklaus Kessler\",\n                \"published_year\": \"2001\",\n                \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n                \"updated_at\": \"2025-05-13T01:55:08.000000Z\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a Chapter Book Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"page_number\":1,\r\n  \"content\":\"ggtghthththththt\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/chapters/2/pages",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"bookself dhaka\",\r\n  \"location\": \"Comprehensive upholstery.\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/bookshelves"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"bookself dhaka\",\n  \"location\": \"Comprehensive upholstery.\"\n\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a Chapter Page Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let json = pm.response.json();\r",
+									"// adjust the path if needed:\r",
+									"let token = json.access_token || json.data?.access_token;\r",
+									"\r",
+									"if (token) {\r",
+									"  // store it as an environment (or collection) variable\r",
+									"  pm.environment.set(\"token\", token);\r",
+									"} else {\r",
+									"  console.warn(\"⚠️ token not found in response\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"page_number\":1,\r\n  \"content\":\"ggtghthththththt\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{library_api_url}}/api/chapters/2/pages/301",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"bookself test\",\r\n  \"location\": \"Comprehensive upholstery.\"\r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{library_api_url}}/api/bookshelves/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"bookself test\",\n        \"location\": \"Comprehensive upholstery.\",\n        \"created_at\": \"2025-05-13T01:55:08.000000Z\",\n        \"updated_at\": \"2025-05-13T02:08:58.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a Chapter Page Collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{library_api_url}}/api/chapters/2/pages/301",
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{library_api_url}}/api/bookshelves/5"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"success\": true,\r\n    \"message\": \"Deleted\"\r\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://api.getpostman.com/me"
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{token}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "test",
+			"script": {
+				"exec": [
+					"\r",
+					"let json = pm.response.json();\r",
+					"// adjust the path if needed:\r",
+					"let token = json.access_token || json.data?.access_token;\r",
+					"\r",
+					"if (token) {\r",
+					"  // store it as an environment (or collection) variable\r",
+					"  pm.environment.set(\"token\", token);\r",
+					"} else {\r",
+					"  console.warn(\"⚠️ token not found in response\");\r",
+					"}\r",
+					""
+				],
+				"type": "text/javascript",
+				"packages": {}
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "library_api_url",
+			"value": "http://127.0.0.1:8008"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
