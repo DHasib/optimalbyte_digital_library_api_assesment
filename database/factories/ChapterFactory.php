@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+use App\Models\Book;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,6 +20,7 @@ class ChapterFactory extends Factory
          return [
             'title' => $this->faker->sentence(4),
             'chapter_number' => $this->faker->numberBetween(1, 10),
+             'book_id' => Book::factory(),
         ];
     }
 }
