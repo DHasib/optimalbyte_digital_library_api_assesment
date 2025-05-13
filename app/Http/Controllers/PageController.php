@@ -49,12 +49,16 @@ class PageController extends Controller
      * @return \Illuminate\Http\JsonResponse The JSON response containing a success flag and the created page data.
      */
     public function store(Request $req, $chapterId) {
-        $data = $req->validate([
-            'page_number' => 'required|integer|min:1',
-            'content'     => 'required|string',
-        ]);
-        $page = Page::create(array_merge($data, ['chapter_id' => $chapterId]));
-        return response()->json(['success'=>true,'data'=>$page],201);
+        try {
+            $data = $req->validate([
+                'page_number' => 'required|integer|min:1',
+                'content'     => 'required|string',
+            ]);
+            $page = Page::create(array_merge($data, ['chapter_id' => $chapterId]));
+            return response()->json(['success'=>true,'data'=>$page],201);
+        } catch (\Exception $e) {
+            return response()->json(['success'=>false,'message'=>$e->getMessage()],500);
+        }
     }
 
     /**

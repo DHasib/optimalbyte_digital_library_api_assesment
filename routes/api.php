@@ -7,6 +7,7 @@ use App\Http\Controllers\{
     BookshelfController,
     BookController,
     ChapterController,
+    PageController
 };
 
 
@@ -15,7 +16,11 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::apiResource('bookshelves', BookshelfController::class);
     Route::apiResource('bookshelves.books', BookController::class);
     Route::apiResource('books.chapters', ChapterController::class);
+    Route::apiResource('chapters.pages', PageController::class);
     Route::post('/register/employee', [AuthController::class, 'employeeRegistration']);
+
+    Route::post('books/search', [BookController::class, 'search']);
+    Route::get('chapters/{chapter}/full-content', [ChapterController::class, 'fullContent']);
 });
 
 
@@ -23,9 +28,10 @@ Route::middleware(['auth:sanctum', 'role:customer,admin'])->group(function () {
      Route::apiResource('bookshelves', BookshelfController::class)->only(['index', 'show']);
      Route::apiResource('bookshelves.books', BookController::class)->only(['index', 'show']);
      Route::apiResource('books.chapters', ChapterController::class)->only(['index', 'show']);
+     Route::apiResource('chapters.pages', PageController::class)->only(['index', 'show']);
+
      Route::post('books/search', [BookController::class, 'search']);
      Route::get('chapters/{chapter}/full-content', [ChapterController::class, 'fullContent']);
-     Route::apiResource('chapters', ChapterController::class)->only(['index', 'show']);
 
 
 });
