@@ -50,19 +50,18 @@ class ChapterController extends Controller
      * @throws \Illuminate\Validation\ValidationException If validation of the input data fails.
      */
     public function store(Request $req, $bookId) {
-        $data = $req->validate([
-            'title'          => 'required|string|max:255',
-            'chapter_number' => 'required|integer|min:1',
-        ]);
+        try {
+            $data = $req->validate([
+                'title'          => 'required|string|max:255',
+                'chapter_number' => 'required|integer|min:1',
+            ]);
 
-        if (!is_numeric($bookId) || $bookId <= 0) {
-            return response()->json(['success'=>false,'message'=>'Invalid book ID'],400);
-        } else if (Chapter::where('book_id',$bookId)->count() == 0) {
-            return response()->json(['success'=>false,'message'=>'There are no chapters in this book to update'],404);
+            $chapter = Chapter::create(array_merge($data, ['book_id' => $bookId]));
+            return response()->json(['success'=>true,'data'=>$chapter],201);
+
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['success'=>false,'message'=>'Book not found'],404);
         }
-
-        $chapter = Chapter::create(array_merge($data, ['book_id' => $bookId]));
-        return response()->json(['success'=>true,'data'=>$chapter],201);
     }
 
     /**
