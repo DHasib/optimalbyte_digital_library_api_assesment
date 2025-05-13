@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Bookshelf;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +22,8 @@ class BookFactory extends Factory
             'title' => $this->faker->sentence(3),
             'author' => $this->faker->name,
             'published_year' => $this->faker->year,
+            'bookshelf_id' => Bookshelf::factory(),
+            'bookshelf_id' => Bookshelf::factory(),
         ];
     }
 }
