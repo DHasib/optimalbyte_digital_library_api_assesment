@@ -129,7 +129,7 @@ Download and import these files into Postman:
 1. In Postman click **Import → File**, and select:
    - `Collections_mdhasib522@gmail.com.postman_collection.json`  
    - `.postman_environment_mdhasib522@gmail.com.json`
-2. In the top-right of Postman, choose the **digital_library_api_env** environment.
+2. In the top-right of Postman, choose the **digital_library_api_env** environment..
 3. Set:
    - `digital_library_api_url` → your API’s base URL (e.g. `http://localhost:8000`)
    - `token` → your JWT/Bearer token  
