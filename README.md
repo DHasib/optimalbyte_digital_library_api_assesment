@@ -121,8 +121,8 @@ steps:
 
 Download and import these files into Postman:
 
-- [📥 Download Postman Api Collection JSON]
-- [📥 Download Postman Env JSON]
+- [📥 Download Postman Api Collection JSON](https://github.com/DHasib/optimalbyte_digital_library_api_assesment/blob/7c14ab56b73e895bdb1e01909f6754afd3cd48b6/Optimalbyte_Digital_library_System_API_Collections.postman_collection_mdHasib522%40gmail.com.json)
+- [📥 Download Postman Env JSON](https://github.com/DHasib/optimalbyte_digital_library_api_assesment/blob/7c14ab56b73e895bdb1e01909f6754afd3cd48b6/library_api_env.postman_environment_mdHasib522%40gmail.com.json)
 
 **Instructions**
 
