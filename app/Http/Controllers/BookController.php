@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use App\Models\Bookshelf;
 
 class BookController extends Controller
 {
@@ -24,8 +25,8 @@ class BookController extends Controller
         // Validate the shelfId
         if (!is_numeric($shelfId) || $shelfId <= 0) {
             return response()->json(['success'=>false,'message'=>'Invalid bookshelf ID'],400);
-        } else if (Book::where('bookshelf_id',$shelfId)->count() == 0) {
-            return response()->json(['success'=>false,'message'=>'There are no books in this bookshelf'],404);
+        } else if (Bookshelf::where('id',$shelfId)->count() == 0) {
+            return response()->json(['success'=>false,'message'=>'Invalid bookshelf ID'],404);
         }
         $books = Book::where('bookshelf_id',$shelfId)
                      ->orderBy('published_year','desc')
@@ -54,22 +55,24 @@ class BookController extends Controller
      */
     public function store(Request $req,$shelfId)
     {
-        $data = $req->validate([
-            'title'          => 'required|string|max:255',
-            'author'         => 'required|string|max:255',
-            'published_year' => 'required|integer|min:1000|max:'.(date('Y')+1),
-        ]);
-        if (!is_numeric($shelfId) || $shelfId <= 0) {
-            return response()->json(['success'=>false,'message'=>'Invalid bookshelf ID'],400);
-        } else if (Book::where('bookshelf_id',$shelfId)->count() == 0) {
-            return response()->json(['success'=>false,'message'=>'There are no books in this bookshelf to update'],404);
+        try {
+            $data = $req->validate([
+                    'title'          => 'required|string|max:255',
+                    'author'         => 'required|string|max:255',
+                    'published_year' => 'required|integer|min:1000|max:'.(date('Y')+1),
+                ]);
+
+                $book = Book::create(array_merge($data, ['bookshelf_id' => $shelfId]));
+
+                return response()->json([
+                    'success'=>true,'data'=>$book
+                ],201);
+
+        } catch (\Exception $e) {
+            return response()->json(['success'=>false,'message'=>$e->getMessage()],500);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['success'=>false,'message'=>'Bookshelf not found'],404);
         }
-        $book = Book::create(array_merge($data, ['bookshelf_id' => $shelfId]));
-
-
-        return response()->json([
-            'success'=>true,'data'=>$book
-        ],201);
 
     }
 
