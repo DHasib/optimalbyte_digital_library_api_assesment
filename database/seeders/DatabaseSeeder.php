@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\{Category, Discount, Role, User, Service, Booking};
+use App\Models\{Role, User, Book, Bookshelf, Chapter, Page};
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
@@ -32,6 +32,23 @@ class DatabaseSeeder extends Seeder
        // create a single admin user with known credentials
        User::factory()->admin()->create();
 
+        // 3) Bookshelves
+        Bookshelf::factory(5)->create();
+        //  get the IDs of all bookshelves
+        $bookshelf_Id  = Bookshelf::all()->pluck('id')->toArray();
 
+
+        // 4) Books
+        Book::factory(20)->create(['bookshelf_id' => $bookshelf_Id[array_rand($bookshelf_Id)]]);
+        //  get the IDs of all books
+        $book_Id  = Book::all()->pluck('id')->toArray();
+
+        // 5) Chapters
+        Chapter::factory(50)->create(['book_id' => $book_Id[array_rand($book_Id)]]);
+        //  get the IDs of all chapters
+        $chapter_Id  = Chapter::all()->pluck('id')->toArray();
+
+        // 6) Pages
+        Page::factory(100)->create(['chapter_id' => $chapter_Id[array_rand($chapter_Id)]]);
     }
 }
